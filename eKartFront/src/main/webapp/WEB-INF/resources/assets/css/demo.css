@@ -1,0 +1,153 @@
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.clearfix:before, .clearfix:after {
+	content: '';
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+
+
+
+.link-copy {
+	position: absolute;
+	top: -2em;
+	right: 2em;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.link-copy::after {
+	content: 'Click to copy direct link';
+	font-size: 0.85em;
+	font-weight: bold;
+	position: absolute;
+	right: 100%;
+	margin: 0 1em 0 0;
+	white-space: nowrap;
+	pointer-events: none;
+	opacity: 0;
+	
+	-webkit-transform: translate3d(10px, 0, 0);
+	transform: translate3d(10px, 0, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.link-copy:hover::after {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.link-copy::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	margin: -25px 0 0 -25px;
+	opacity: 0;
+	border-radius: 50%;
+	background: #d94f5c;
+}
+
+.link-copy--animate::before {
+	-webkit-animation: pulse 0.3s;
+	animation: pulse 0.3s;
+}
+
+@
+-webkit-keyframes pulse {from { opacity:1;
+	-webkit-transform: scale3d(0, 0, 1);
+	transform: scale3d(0, 0, 1);
+}
+
+to {
+	opacity: 0;
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+
+}
+@
+keyframes pulse {from { opacity:1;
+	-webkit-transform: scale3d(0, 0, 1);
+	transform: scale3d(0, 0, 1);
+}
+
+to {
+	opacity: 0;
+	transform: scale3d(1, 1, 1);
+	webkit-transform: scale3d(1, 1, 1);
+}
+
+}
+@
+keyframes octocat-wave { 0%, 100% {
+	transform: rotate(0);
+}
+
+20%,
+60%
+{
+transform
+:
+ 
+rotate
+(-25deg);
+
+	
+}
+40%,
+80%
+{
+transform
+:
+ 
+rotate
+(10deg);
+
+	
+}
+}
+@media ( max-width :500px) {
+	.github-corner:hover .octo-arm {
+		animation: none;
+	}
+	.github-corner .octo-arm {
+		animation: octocat-wave 560ms ease-in-out;
+	}
+}
+
+/* Content */
+.section {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-align-items: center;
+	align-items: left;
+}
+
+.section:nth-of-type(odd):not (:first-child ) {
+	color: #fff;
+	background: #2a282b;
+}
+
+/* Related demos */
+@media screen and (max-width:50em) {
+	.section--intro {
+		font-size: 1em;
+	}
+}

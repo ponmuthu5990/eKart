@@ -1,0 +1,102 @@
+section {
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 36px;
+  margin: 0px auto;
+  width: 60%;
+  max-width: 500px;
+}
+
+form {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+form label {
+  margin-bottom: 4px;
+  padding-left: 4px;
+  font-family: Athiti;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+}
+form input {
+  margin-bottom: 12px;
+}
+form button {
+  margin-top: 20px;
+}
+
+input {
+  font-family: Athiti;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 0px;
+  padding: 12px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0);
+  width: 100%;
+  box-sizing: border-box;
+}
+input:hover {
+  -webkit-transform: scale(1.03, 1.03);
+          transform: scale(1.03, 1.03);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
+}
+input:focus {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
+  -webkit-transform: scale(1.03, 1.03);
+          transform: scale(1.03, 1.03);
+  border: 2px solid #B2EBF2 !important;
+  color: #00838F;
+}
+
+button, .btn {
+  color: white;
+  cursor: pointer;
+  border: 0px;
+  font-family: Athiti;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 16px;
+  box-sizing: content-box;
+  background-color: #F50057;
+  border-radius: 4px;
+  border-bottom: 5px solid #C51162;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.12);
+  -webkit-transition: all 150ms ease-in;
+  transition: all 150ms ease-in;
+  outline: none;
+  font-size: 16px;
+}
+button:hover, .btn:hover {
+  background-color: #D7004C;
+  border-color: #A10A4F;
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+  box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.12);
+}
+button:focus, .btn:focus {
+  background-color: #D7004C;
+  border-color: #A10A4F;
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+  box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.12);
+}
+button:active, .btn:active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border-bottom: 4px solid #A10A4F;
+}
+
+
+
+
+
