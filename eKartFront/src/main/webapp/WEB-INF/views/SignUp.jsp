@@ -9,14 +9,14 @@
   <form:form action="${newUser}" method="post" modelAttribute="customer">
     <div class="row">
     <div class="group col-sm-5">      
-      <input type="text" required>
+      <input type="text" name="fname" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>First Name</label>
     </div>
       
     <div class="group col-sm-4 col-sm-offset-3">      
-      <input type="text" required>
+      <input type="text" name="lname" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Last Name</label>
@@ -24,20 +24,20 @@
     </div>
     <div class="row">
      <div class="group col-sm-5">      
-      <input type="text" name="userName" required>
+      <input type="text" name="username" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>User Name</label>
     </div>
      <div class="group col-sm-4 col-sm-offset-3">      
-      <input type="text" name="emailId" required>
+      <input type="text" name="email" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Email</label>
     </div></div>
     <div class="row">
      <div class="group col-sm-5">      
-      <input type="password" name="passWord" required>
+      <input type="password" name="password" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Password</label>
@@ -46,7 +46,7 @@
       <input type="password" required>
       <span class="highlight"></span>
       <span class="bar"></span>
-      <label>Password</label>
+      <label>Confirm Password</label>
     </div>
     </div>
     <div class="row">

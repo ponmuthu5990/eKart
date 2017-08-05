@@ -57,7 +57,7 @@ public class ProductController {
 	@RequestMapping("/admin/newProduct")
 	public String addProduct(@Valid @ModelAttribute Product product, @RequestParam(value="image") MultipartFile[] image,BindingResult result, Model model) {
 		
-		
+		int j = 0;
 		
 		if(result.hasErrors()){
 			model.addAttribute("categoryList", categoryService.list());
@@ -66,7 +66,8 @@ public class ProductController {
 			return "Home";
 
 		}
-		
+		product.setNoOfImg(image.length);
+		product.setStatus(true);
 		Product product2 = productService.save(product);
 		
 	
@@ -78,9 +79,10 @@ public class ProductController {
 		System.out.println("product ID :" + product2.getId());
 		System.out.println("----------------------------");
 		System.out.println(path);
-		for (int i = 0; i < image.length; i++) { 
+		for (int i = 1; i <= image.length; i++) { 
+			j = i-1;
 			String filename = product2.getProductCode()+"_"+product2.getId()+"_"+i+".jpg";
-			FileUtil.upload(path, image[i], filename);
+			FileUtil.upload(path, image[j], filename);
 		}
 		return "redirect:/admin/productTable";
 	}

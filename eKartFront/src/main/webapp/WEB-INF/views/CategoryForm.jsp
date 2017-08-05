@@ -4,7 +4,7 @@
    <c:url value="/admin/newCategory" var="newCategory" />
     <form action="${newCategory}" method="post">
       <label for="nome">Category Name</label>
-       <input type="hidden" name="categoryId" id="name" value="${category.categoryId}" />
+     
       <input type="text" name="categoryName" id="name" value="${category.categoryName}"/>
       <label for="email">Description</label>
       <input type="text" name="desc" id="email" value="${category.desc}"/>

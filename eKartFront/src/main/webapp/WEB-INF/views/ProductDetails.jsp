@@ -165,7 +165,7 @@ background: black;
       }
 </style>
 </head>
-<body>
+<body style="margin-top: 2em;">
 
  
   <button  type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="btn1">Open Small Modal</button>
@@ -179,7 +179,7 @@ background: black;
         
         </div>
         <div class="modal-body">
-          <iframe width="825" height="345" style="border:none;" src="https://www.youtube.com/embed/nO1ROKMjPqI?autoplay=1">
+          <iframe width="825" height="345" style="border:none;" src="https://www.youtube.com/embed/${product.url}?autoplay=1">
 </iframe>
         </div>
        
@@ -189,29 +189,33 @@ background: black;
 
 <div class="product">
   <div class="product--title">
-    <h2>My Awesome Product</h2>
+    <h2>${product.productName}</h2>
   </div>
   <div class="product--body">
   <div class="product--image">
     <div class="icon-images">
-      <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-front.jpg"/>
-      <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-detail.jpg"/>
-      <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-back.jpg"/>
+    <c:forEach items="${noOfImg}" var="Img" varStatus="status">
+      <img src="${image}/${product.productName}_${product.productCode}/${product.productCode}_${product.id}_${status.count}.jpg"/>
+      </c:forEach>
+      <!-- <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-detail.jpg"/>
+      <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-back.jpg"/> -->
     </div>
-    <img src="http://stalkbuylove.com/media/catalog/product/cache/1/image/393x502/9df78eab33525d08d6e5fb8d27136e95/i/n/in1335avv-167-back.jpg" class="display-img">
+    <img src="${image}/${product.productName}_${product.productCode}/${product.productCode}_${product.id}_1.jpg" class="display-img" width="70%" height="30%">
   </div>
   <div class="product--details">
   <div class="product--price">
-    <span class="product--price_price">Rs. 800</span>
+    <span class="product--price_price">Rs. ${product.price}</span>
     <span class="product--price_offer">new arrivel !</span>
   </div>
-    <div class="product--desc"><p>This is my awesome product. Its comfortable to wear, and nice to look.</p></div>
-  <div class="product--size">
+    <div class="product--desc"><p>${product.description}</p>
+    <p>${product.category.categoryName}</p>
+    </div>
+  <!-- <div class="product--size">
     <span>s</span>
     <span class="active">m</span>
     <span>l</span>
     <span>xl</span>
-  </div>
+  </div> -->
   <div class="product--quantity">
     <input class="quantity" type="number" placeholder="quantity" min="1" max="10" value="1"></input>
   </div>

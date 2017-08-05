@@ -8,7 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Line Menu Styles</title>
 	   <c:url value="/resources/assets/css" var="css"/>  
-	    <c:url value="/resources/assets/js" var="js"/>  
+	    <c:url value="/resources/assets/js" var="js"/> 
+	      <c:url value="/resources/assets/images/products" var="image"/>   
+	   
 		<link rel="stylesheet" type="text/css" href="${css}/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="${css}/bootstrap.min.css" />
 		
