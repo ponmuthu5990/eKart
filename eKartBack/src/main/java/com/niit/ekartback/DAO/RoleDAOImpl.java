@@ -9,41 +9,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.ekartback.model.Category;
-import com.niit.ekartback.model.Product;
+import com.niit.ekartback.model.Role;
 
 @Repository
-public class ProductDAOImpl implements ProductDAO{
+public class RoleDAOImpl implements RoleDAO{
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public Product save(Product product) {
+	public void save(Role role) {
 		Session session=sessionFactory.getCurrentSession();
-		session.save(product);
-		return product;
+		session.saveOrUpdate(role);
 	}
 
-	public void update(Product product) {
+	public void update(Role role) {
 		Session session=sessionFactory.getCurrentSession();
-		session.update(product);
+		session.update(role);
 	}
 
-	public List<Product> list() {
+	public List<Role> list() {
 		Session session=sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from Product");
-		List<Product> productList=query.list();
-		return productList;
+		Query query=session.createQuery("from Role");
+		List<Role> roleList=query.list();
+		return roleList;
 	}
 
-	public void delete(Product product) {
+	public void delete(Role role) {
 		Session session=sessionFactory.getCurrentSession();
-		session.delete(product);
+		session.delete(role);
 	}
 
-	public Product getByProductId(String id) {
+	public Role getByUserId(int userId) {
 		Session session=sessionFactory.getCurrentSession();
-		Product product=(Product) session.get(Product.class, id);
-		return product;
+		Role role=(Role) session.get(Category.class, userId);
+		return role;
 	}
 
 }

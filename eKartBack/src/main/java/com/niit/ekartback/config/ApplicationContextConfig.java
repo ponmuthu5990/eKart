@@ -19,7 +19,6 @@ import com.niit.ekartback.model.Customer;
 import com.niit.ekartback.model.Product;
 import com.niit.ekartback.model.Role;
 import com.niit.ekartback.model.Supplier;
-import com.niit.ekartback.model.User;
 
 @Configuration
 @ComponentScan("com.niit.*")
@@ -54,7 +53,7 @@ public class ApplicationContextConfig {
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
-		sessionBuilder.addAnnotatedClass(User.class);
+		/*sessionBuilder.addAnnotatedClass(User.class);*/
 		sessionBuilder.addAnnotatedClass(Role.class);
 		sessionBuilder.addAnnotatedClass(Category.class);
 		sessionBuilder.addAnnotatedClass(Product.class);

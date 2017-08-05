@@ -20,42 +20,48 @@ public class Role {
 	@Id
 	@GeneratedValue(generator = "newGenerator")
 	@GenericGenerator(name = "newGenerator", strategy = "foreign", parameters = {
-	@Parameter(value = "user", name = "property") })
+			@Parameter(value = "customer", name = "property") })
 	private int userId;
-	
-	private String userName;
-	
+
+	private String username;
+
 	private String role;
-	
-	public String getUserName() {
-		return userName;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userId")
+	private Customer customer;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	 @OneToOne(cascade = CascadeType.ALL)
-	    @JoinColumn(name="userId")
-	    private User user;
 
 	public int getUserId() {
 		return userId;
 	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public User getUser() {
-		return user;
+
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
+
 	
-	 
 }
