@@ -31,14 +31,21 @@
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<%-- <div class="form-group">
   <label class="col-md-4 control-label" for="description">description</label>  
   <div class="col-md-4">
     <form:input path = "description" class="form-control" placeholder="description"/>
     <form:errors path="quantity" cssStyle="color:red" ></form:errors>
   </div>
-</div>
-
+</div> --%>
+<div class="form-group">
+	 <label class="col-md-4 control-label" for="price">description</label>  
+	 <div class="col-md-4">  
+ 	<div id="productDesc">    
+    </div>
+    <input type="button" id="desc" value="Add Desc">
+      </div>
+    </div>
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Category">Category</label>
@@ -98,6 +105,7 @@ if(inputCount<3){
 				var input = document.createElement("input");
 				input.type = "file";
                 input.name = "image";
+                input.setAttribute("multiple", "");
 				div.appendChild(document.createElement("br"));
                 div.appendChild(document.createElement("br"));
 				div.appendChild(input);
@@ -105,6 +113,24 @@ if(inputCount<3){
         else
         {
         alert("Image limit is Over");
+        }
+			}
+</script>
+<script>
+document.getElementById("desc").onclick=function() {
+var inputCount = document.getElementById('productDesc').getElementsByTagName('input').length;
+if(inputCount<5){
+				var div = document.getElementById("productDesc");
+				var input = document.createElement("input");
+				input.type = "text";
+                input.name = "description";              
+				div.appendChild(document.createElement("br"));
+                div.appendChild(document.createElement("br"));
+				div.appendChild(input);
+        }
+        else
+        {
+        alert("Desc limit is Over");
         }
 			}
 </script>

@@ -24,7 +24,7 @@
     </div>
     <div class="row">
      <div class="group col-sm-5">      
-      <input type="text" name="username" required>
+      <input type="text" name="user.username" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>User Name</label>
@@ -37,7 +37,7 @@
     </div></div>
     <div class="row">
      <div class="group col-sm-5">      
-      <input type="password" name="password" required>
+      <input type="password" name="user.password" required>
       <span class="highlight"></span>
       <span class="bar"></span>
       <label>Password</label>

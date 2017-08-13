@@ -1,6 +1,6 @@
  
 
- <c:url value="/user/productDetails" var="productDetails"/>  
+
 <ul id="movieposters">
   <c:forEach items="${listProduct}" var="product" varStatus="status">
 			<li>

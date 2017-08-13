@@ -21,6 +21,7 @@ public class CategoryController {
 	@RequestMapping("/admin/categoryForm")
 	public String categoryForm(Model model) {
 		model.addAttribute("adminClickedAddCategory", "true");
+		model.addAttribute("category", new Category());
 		return "Home";
 	}
 	
@@ -35,12 +36,9 @@ public class CategoryController {
 	@RequestMapping("/admin/newCategory")
 	public String addCategory(@ModelAttribute Category category, Model model) {
 		
-		if(category.getCategoryId() == 0){
+		
 			categorySerive.save(category);
-		}
-		else{
-			categorySerive.update(category);
-		}
+	
 	
 		
 		return "redirect:/admin/categoryTable";

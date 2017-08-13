@@ -1,5 +1,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -54,17 +56,26 @@
 		
 		<!-- product details form style -->
 		<c:if test="${userClickedProduct == 'true'}">
-	<%-- 	<link rel="stylesheet" type="text/css" href="${css}/productDetails.css" /> --%>
-		
-		
+	<%-- 	<link rel="stylesheet" type="text/css" href="${css}/productDetails.css" /> --%>		
 		</c:if>
 		
+		<c:if test="${userClickedMyKart == 'true'}">
+		<link rel="stylesheet" type="text/css" href="${css}/myKart.css" />
+		</c:if>
+		
+		<c:if test="${not empty RecentlyViewed}">
+		<link rel="stylesheet" type="text/css" href="${css}/recentlyViewed.css" />
+		</c:if>
 		<!-- AngularJs -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		
+		<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		</script>
 		
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	<body style="padding: 2px 30px 0px 30px;">
+	<body  ng-app="myApp" style="padding: 2px 30px 0px 30px;">
+	 <c:url value="/all/productDetails" var="productDetails"/>  

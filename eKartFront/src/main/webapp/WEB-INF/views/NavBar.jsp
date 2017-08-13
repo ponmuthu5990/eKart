@@ -25,6 +25,7 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
                     <li>
                      <c:url value="/admin/categoryTable" var="categoryTable"/>
                     <a href="${categoryTable}">Category</a>
@@ -37,22 +38,31 @@
                      <c:url value="/admin/productTable" var="productTable"/>
                     <a href="${productTable}">Product</a>
                     </li>
+                    </security:authorize>
                 </ul>
                  <ul class="nav navbar-nav navbar-right">
+                  <security:authorize access="hasRole('ROLE_USER')">
                     <li>
-                        <a href="#">Cart</a>
+                     <c:url value="/user/myCart" var="myCart"/>  
+                        <a href="${myCart}">Cart(${sessionScope.noOfItems})</a>
                     </li>
+                    </security:authorize>
+                    <c:if test="${pageContext.request.userPrincipal.name==null }">
                     <li>
                      <c:url value="/all/signIn" var="url2"/>  
                         <a href="${url2}">SignIn</a>
-                    </li>
-                    <li>
-                        <a href="#">SignOut</a>
-                    </li>
+                    </li>                    
                      <li>
                      <c:url value="/all/signUp" var="url1"/>  
                         <a href="${url1}">SignUp</a>
                     </li>
+                    </c:if>
+                    <c:if test="${pageContext.request.userPrincipal.name!=null }">
+                    <li>
+                    <c:url value="/all/signOut" var="url3"/>  
+                        <a href="${url3}">SignOut</a>
+                    </li>
+                    </c:if>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security 
+       http://www.springframework.org/schema/security/spring-security.xsd">
+       
+       
+       <security:http auto-config="true">
+	<security:csrf disabled="true"/>
+	<security:intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/user/**"  access="hasRole('ROLE_USER')"/>
+	<security:intercept-url pattern="/**"  access="permitAll"/>
+	
+	<security:form-login login-page="/all/signIn"
+	username-parameter="username" password-parameter="password"
+	login-processing-url="/isValidUser"
+	default-target-url="/afterlogin"
+	authentication-failure-url="/all/signIn?error"/>
+	
+	
+	<security:logout logout-success-url="/all/signIn?logout"
+	logout-url="/all/signOut" />
+	 
+	</security:http>
+ 
+ 
+ 
+ <security:authentication-manager>
+ <security:authentication-provider>
+ <security:jdbc-user-service data-source-ref="dataSource"
+authorities-by-username-query="SELECT username,role from role where username=?"
+ users-by-username-query="SELECT username,password,enabled from user where username=? "
+ 
+ />
+ </security:authentication-provider>
+ </security:authentication-manager>
+       
+       
+       </beans>

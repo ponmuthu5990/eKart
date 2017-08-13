@@ -2,14 +2,16 @@
 <section>
   <div>
    <c:url value="/admin/newCategory" var="newCategory" />
-    <form action="${newCategory}" method="post">
-      <label for="nome">Category Name</label>
+   
+    <form:form action="${newCategory}" method="post" modelAttribute="category">
      
-      <input type="text" name="categoryName" id="name" value="${category.categoryName}"/>
+    <form:hidden path="categoryId" />
+      <label for="nome">Category Name</label>     
+      <form:input type="text" path="categoryName" id="name"/>
       <label for="email">Description</label>
-      <input type="text" name="desc" id="email" value="${category.desc}"/>
+      <form:input type="text" path="desc" id="email" />
    
       <button type="submit">Submit</button>
-    </form>
+    </form:form>
   </div>
 </section>

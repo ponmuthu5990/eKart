@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.niit.ekartback.model.Product;
+import com.niit.ekartback.model.ProductDesc;
 import com.niit.ekartback.service.CategoryService;
+import com.niit.ekartback.service.ProductDescService;
 import com.niit.ekartback.service.ProductService;
 import com.niit.ekartback.service.SupplierService;
 import com.niit.ekartfront.util.FileUtil;
@@ -28,11 +31,20 @@ public class ProductController {
 	ProductService productService;
 
 	@Autowired
+	ProductDescService productDecService;
+	
+	@Autowired
 	CategoryService categoryService;
 
 	@Autowired
 	SupplierService supplierService;
 
+	@Autowired
+	ProductDesc productDesc;
+	
+	@Autowired
+	ProductDescService productDescSerive;
+	
 	@RequestMapping("/admin/productTable")
 	public String viewProductPage(Model model) {
 			
@@ -45,8 +57,16 @@ public class ProductController {
 	{
 		List<Product> listProduct = productService.list();
 		for (Product product : listProduct) {
+			List<ProductDesc> productDescs = productDecService.list(product.getId());
+			System.out.println("----------------");
+			System.out.println(product.getId());
+			System.out.println("----------------");
+			System.out.println(productDescs.size());
+			System.out.println("----------------");
 			product.getCategory().setProducts(null);
 			product.getSupplier().setProducts(null);
+			product.setProductDescs(null);
+			product.setProductViews(null);
 		}
 		/*System.out.println(listProduct.size());
 		System.out.println(listProduct.get(0).getProductName());*/
@@ -54,8 +74,59 @@ public class ProductController {
 		return listProduct;
 	}
 	
+	@RequestMapping(value = "viewProduct/{productId}", method = RequestMethod.GET)
+	public @ResponseBody Product getProductDetails(@PathVariable("productId") String productId){
+		
+		Product product = productService.getByProductId(productId);
+		product.getCategory().setProducts(null);
+		product.getSupplier().setProducts(null);
+		product.setProductDescs(null);
+		product.setProductViews(null);
+		return product;
+		
+	}
+	
+	@RequestMapping(value = "getDescription/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<ProductDesc> viewProductDesc(@PathVariable("id") String id){
+		
+		List<ProductDesc> productDescs = productDecService.list(id);
+		Product product = productService.getByProductId(id);
+		/*Category category = categoryService.getByCategoryId(product.getCategory().getCategoryId());
+		System.out.println("categoryid : " + category.getCategoryId() + category.getCategoryName()); 
+		System.out.println("========================");
+		
+		Supplier supplier = supplierService.getBySupplierId(product.getSupplier().getSupplierId());
+		System.out.println("supplierId :" + supplier.getSupplierId() + supplier.getSupplierName());
+		*/
+		for (ProductDesc productDesc : productDescs) {
+			System.out.println("-----------------------");
+			System.out.println(productDesc.getDescId());
+			System.out.println("-----------------------");
+			System.out.println(productDesc.getDescription());
+			System.out.println("-----------------------");
+			
+			productDesc.setProduct(product); 
+		
+			productDesc.getProduct().setCategory(null);
+			productDesc.getProduct().setSupplier(null);
+//			productDesc.getProduct().setProductName(product.getProductName());
+			//productDesc.getProduct().setId(id);
+			/*productDesc.getProduct().setNoOfDesc(product.getNoOfDesc());
+			productDesc.getProduct().setNoOfImg(product.getNoOfImg());
+			productDesc.getProduct().setPrice(product.getPrice());
+			productDesc.getProduct().setProductCode(product.getProductCode());*/
+			productDesc.getProduct().setProductDescs(null);
+			productDesc.getProduct().setProductViews(null);
+			/*productDesc.getProduct().setQuantity(product.getQuantity());
+			productDesc.getProduct().setStatus(false);
+			productDesc.getProduct().setUrl(product.getUrl());*/
+			
+		}
+		return productDescs;
+	}
+	
 	@RequestMapping("/admin/newProduct")
-	public String addProduct(@Valid @ModelAttribute Product product, @RequestParam(value="image") MultipartFile[] image,BindingResult result, Model model) {
+	public String addProduct(@Valid @ModelAttribute Product product, @RequestParam(value = "description") String[] description, @RequestParam(value="image") MultipartFile[] image,BindingResult result, Model model) {
 		
 		int j = 0;
 		
@@ -66,10 +137,20 @@ public class ProductController {
 			return "Home";
 
 		}
+	
+		
 		product.setNoOfImg(image.length);
+		product.setNoOfDesc(description.length); 
 		product.setStatus(true);
 		Product product2 = productService.save(product);
 		
+		/*description*/
+		for (int i = 0; i < description.length; i++) {
+			productDesc.setProduct(product2);
+			productDesc.setDescription(description[i]);
+			productDesc.setProductId(product2.getId());
+			productDescSerive.save(productDesc);
+		}
 	
 		
 		String path = "E://muthu/eKart/eKartFront/src/main/webapp/WEB-INF/resources/assets/images/products/" + product.getProductName()+ "_" + product.getProductCode() + "/";
