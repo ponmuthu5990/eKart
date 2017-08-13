@@ -15,4 +15,6 @@ public interface ProductDAO {
 	public void delete(Product product);
 	
 	public Product getByProductId(String productId);
+	
+	
 }

@@ -26,4 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
+	public Customer getByUserName(String username) {
+		// TODO Auto-generated method stub
+		return customerDAO.getByUserName(username);
+	}
+
 }

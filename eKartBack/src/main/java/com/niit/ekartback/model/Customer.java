@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -31,14 +32,6 @@ public class Customer {
 	@NotEmpty
 	private String lname;
 
-	@Column(unique = true, nullable = false)
-	private String username;
-
-	@NotEmpty
-	private String password;
-
-	private boolean enabled;
-
 	private String address;
 
 	private String zpiCode;
@@ -55,6 +48,16 @@ public class Customer {
 	@JoinColumn(name = "userId")
 	private Role role;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usersId")
+	private User user;
+
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cartId")
+	@Valid
+	private Cart cart;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -87,28 +90,12 @@ public class Customer {
 		this.lname = lname;
 	}
 
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getEmail() {
@@ -143,4 +130,13 @@ public class Customer {
 		this.zpiCode = zpiCode;
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	
 }
