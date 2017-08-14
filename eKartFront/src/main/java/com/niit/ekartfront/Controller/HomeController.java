@@ -109,6 +109,9 @@ public class HomeController {
 					productView2.setUserId(customer.getUserId());
 					productView2.setProduct(product);
 					productViewService.save(productView2);
+					
+					product.setViews(product.getViews() + 1);
+					productService.update(product);
 				}
 			}
 				
@@ -121,8 +124,12 @@ public class HomeController {
 	
 		System.out.println("1111111111111111111111111111111111111111111111111111111100000000000000000" + productViews.size());
 			
+	/*	if(!productViewService.getByCustomerAndProductId(customer.getUserId(), id)){
 			product.setViews(product.getViews() + 1);
 			productService.update(product);
+		}*/
+		
+			
 			
 			/*ProductView productView = new ProductView();
 			productView.setUserId(customer.getUserId());
@@ -149,8 +156,10 @@ public class HomeController {
 			
 		}
 			
-		
-		
+	/*	if(product.getOffer() > 0){
+			model.addAttribute("", arg1)
+		}
+		*/
 	
 			
 			List<Integer> noOfImg = new ArrayList<Integer>();
@@ -158,6 +167,8 @@ public class HomeController {
 
 				noOfImg.add(i);
 			}
+			
+			
 			
 			model.addAttribute("productDesc", productDescSerivce.list(id));
 			model.addAttribute("noOfImg", noOfImg);

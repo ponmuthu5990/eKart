@@ -255,7 +255,27 @@ z-index:30;
 display:block;
 }
   
-  
+  /* recently viewed */
+  div.recent {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.recent:hover {
+    border: 1px solid #777;
+}
+
+div.recent img {
+    width: 100%;
+    height: auto;
+}
+
+div.description {
+    padding: 15px;
+    text-align: center;
+}
   </style>
      <style>
 .modal-content{
@@ -333,8 +353,15 @@ background: black;
   </div>
   <div class="product--details">
   <div class="product--price">
-    <span class="product--price_price">Rs. ${product.price}</span>
-    <span class="product--price_offer">new arrivel !</span><br>
+  <c:if test="${product.offer == 0 }">
+    <span class="product--price_price">Rs. ${product.price }</span>
+    </c:if>
+    <c:if test="${product.offer > 0 }">
+    <div class="row">
+    <span class="product--price_price" style="font-size: x-large;;"> Rs. ${product.price - (product.price * (product.offer)/100)}  <s style="font-size: medium;">Rs. ${product.price}</s></span>    
+    <span class="product--price_offer">${product.offer}% off</span></div><br>
+    
+    </c:if>
     <span style="color: lightblue;">${product.views} views</span>
   </div>
     <div class="product--desc">
@@ -379,10 +406,15 @@ background: black;
     <c:if test="${view.product.id != product.id}">
  
  
+    <div class="recent">
+  <a href="${productDetails}/${view.product.id}">
+    <img src="${image}/${view.product.productName}_${view.product.productCode}/${view.product.productCode}_${view.product.id}_1.jpg" alt="${view.product.productCode}" width="300" height="200">
+  </a>
+  <div class="description">${view.product.productName}</div>
+</div>
     
     
-    
-			<section class="demo-2 col-lg-4">
+		<%-- 	<section class="demo-2 col-lg-4">
 				<div class="grid">
 					<div class="box">
 						<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -398,7 +430,7 @@ background: black;
 					
 					
 				</div><!-- /grid -->
-			</section>
+			</section> --%>
 			</c:if>
     
     </c:forEach>

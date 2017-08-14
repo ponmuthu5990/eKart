@@ -117,7 +117,8 @@
 <script type="text/javascript">
 	
 	 app.controller("ProductController",function($rootScope,$scope,$http){
-		 var noOfImg=[];
+		 		 
+		
 		$scope.getdata = function(){
 			$http({
 				method : 'GET',
@@ -129,11 +130,15 @@
 			});
 		}
 		$scope.getImage = function(product){
+			var noOfImg=[];
+			 $rootScope.images = [];
+			 $scope.image = {};
 			$rootScope.singleProduct = product;
 			for (var i = 1; i <= product.noOfImg; i++) {
 				noOfImg.push(i)	
 			}
-			$rootScope.images = noOfImg;
+			$scope.image = noOfImg;
+			$rootScope.images = $scope.image;
 		}
 		$scope.getProduct = function(productId){
 			$http({

@@ -30,6 +30,8 @@
         <!--  <span>White</span> -->
         </div>
  
+ 		<c:if test="${cart.products.quantity > 0 }">
+ 
         <div class="quantity">
         <c:url value="/user/plus" var="plus"/>  
           <button class="plus-btn" type="button" name="button">
@@ -45,6 +47,12 @@
         <div class="total-price">$${cart.products.price}</div>
           
            <div class="total-price">$${cart.totalprice}</div>
+           </c:if>
+         <c:if test="${cart.products.quantity == 0 }">
+          <div class="quantity">
+          <h2 style="color: red;">Out Of Stack</h2>
+          </div>
+         </c:if>
           <c:url value="/remove/cart" var="removeKart"/>
           <div class="total-price"><a href="${removeKart}/${cart.id}" style="text-decoration: none;">Remove</a></div>
       </div>
@@ -57,3 +65,6 @@
  </c:if>
      
     </div>
+  
+  <c:url value="/user/placeOrder" var="order"/>    
+    <a href="${order}" class="btn btn-lg btn-success" style="float: right;">Place Order</a>

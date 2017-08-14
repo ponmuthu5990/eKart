@@ -1,6 +1,7 @@
 package com.niit.ekartfront.Controller;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -47,7 +48,7 @@ public class CartController {
 		
 			List<CartItem> cartItems = cart.getCartitems();
 			session.setAttribute("noOfItems", cartItems.size());
-		for (CartItem cartItem : cartItems) {
+		/*for (CartItem cartItem : cartItems) {
 			
 			System.out.println("<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>");		
 			System.out.println(cartItem.getProducts().getId() + "==" + id);			
@@ -70,7 +71,7 @@ public class CartController {
 					return "redirect:/user/myCart";
 				}
 			}
-		}
+		}*/
 		 
 		
 		System.out.println("product PRice :" + product.getPrice());
@@ -113,21 +114,44 @@ public class CartController {
 		
 		session.setAttribute("noOfItems", cart.getCartitems().size());
 		ModelAndView mv = new ModelAndView("Home");
-		mv.addObject("cartList", cart);
-		mv.addObject("userClickedMyKart", "true");
 		
+		List<CartItem> cartItems = cart.getCartitems();
 		
-		/*for (CartItem cartItem : cart.getCartitems()) {
+		for (CartItem cartItem : cartItems) {
 			  
-			if(cartItem.getQuantity() < cartItem.getProducts().getQuantity()){
-				
-				int qty = cartItem.getQuantity() - cartItem.getProducts().getQuantity();
-				cartItem.setQuantity(qty);
-				cartItem.setTotalprice(qty * cartItem.getProducts().getPrice());
-				//double price = cart.getgTotal() - ;
-			}
 			
-		}*/
+		if(cartItem.getProducts().getQuantity() > 0){
+				
+				if(cartItem.getQuantity() > cartItem.getProducts().getQuantity()){
+					
+					int qty = cartItem.getQuantity() - cartItem.getProducts().getQuantity();
+					cartItem.setQuantity(cartItem.getProducts().getQuantity());
+					cartItem.setTotalprice(cartItem.getProducts().getQuantity() * cartItem.getProducts().getPrice());
+					double price = cart.getgTotal() - (qty * cartItem.getProducts().getPrice());
+					cart.setgTotal(price);
+					cartItemservice.save(cartItem);
+					mv.addObject("product", "we have only "+ cartItem.getProducts().getQuantity()  +" quantity of " + cartItem.getProducts().getProductName() +" available in Stock");
+					
+				}
+				
+				if(cartItem.getQuantity() == 0){
+					cartItem.setQuantity(1);
+					cartItem.setTotalprice(cartItem.getProducts().getPrice());
+					cart.setgTotal(cart.getgTotal() + cartItem.getProducts().getPrice());
+					cartItemservice.save(cartItem);
+				}
+				
+				
+				
+		}
+	/*if(cartItem.getProducts().getQuantity() == 0){
+		cartItems.remove(cartItem);
+		cartItems.add(cartItem);
+	}
+		*/	
+			
+		}
+	
 		Product ops = (Product) session.getAttribute("ops");
 		if(ops != null){
 			
@@ -144,6 +168,8 @@ public class CartController {
 			}		
 			
 		}
+		mv.addObject("cartList", cart);
+		mv.addObject("userClickedMyKart", "true");
 		session.removeAttribute("ops");
 		return mv;
 		
