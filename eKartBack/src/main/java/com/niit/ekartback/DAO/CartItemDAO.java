@@ -10,4 +10,5 @@ public interface CartItemDAO {
 	
 	public void deleteAll();
 	
+	public void saveOrUpdate(CartItem cartItem);
 }

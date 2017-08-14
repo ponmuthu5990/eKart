@@ -34,7 +34,7 @@ public class Cart {
 	
 	
 	@OneToMany(mappedBy="cart",fetch=FetchType.EAGER)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+/*	@OnDelete(action = OnDeleteAction.CASCADE)*/
 	private List<CartItem> cartitems;
 
 

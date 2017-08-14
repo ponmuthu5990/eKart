@@ -27,5 +27,7 @@ public class CartItemServiceImpl implements CartItemService {
 		cartItemDAO.deleteAll();
 
 	}
-
+	public void saveOrUpdate(CartItem cartItem) {
+		cartItemDAO.saveOrUpdate(cartItem);
+	}
 }

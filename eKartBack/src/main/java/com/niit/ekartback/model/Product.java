@@ -35,7 +35,7 @@ public class Product implements Serializable {
 	private String id;
 
 	@NotEmpty(message = "Product name should not be empty")
-	@Pattern(regexp = "[a-zA-Z0-9.]*", message = "the name can only contain letters")
+	/*@Pattern(regexp = "[a-zA-Z0-9.]*", message = "the name can only contain letters")*/
 	private String productName;
 
 	@Min(value = 50)

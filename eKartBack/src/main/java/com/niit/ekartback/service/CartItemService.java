@@ -9,4 +9,6 @@ public interface CartItemService {
 	public void delete(CartItem cartItem);
 
 	public void deleteAll();
+	
+	public void saveOrUpdate(CartItem cartItem);
 }
