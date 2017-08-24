@@ -16,7 +16,12 @@
    
       <!-- Product #1 -->
       <c:if test="${fn:length(cartList.cartitems) > 0}">
+        <c:set var = "statusCheck" scope = "session" value = "0"/>
+         <c:set var = "grandTotal" scope = "session" value = "0"/>
       <c:forEach items="${cartList.cartitems}" var="cart" varStatus="status">
+      
+   
+    
       <div class="item">
        
  
@@ -30,8 +35,8 @@
         <!--  <span>White</span> -->
         </div>
  
- 		<c:if test="${cart.products.quantity > 0 }">
- 
+ 		<c:if test="${cart.products.quantity > 0 && cart.products.status}">
+   <c:set var = "grandTotal"  value = "${grandTotal + cart.totalprice}"/>  
         <div class="quantity">
         <c:url value="/user/plus" var="plus"/>  
           <button class="plus-btn" type="button" name="button">
@@ -44,11 +49,19 @@
           </button>
         </div>
  
-        <div class="total-price">$${cart.products.price}</div>
+        <div class="total-price">
+        <c:if test="${cart.products.offer == 0 }">
+        $${cart.products.price}
+        </c:if>
+        <c:if test="${cart.products.offer > 0 }">
+        $${cart.products.price - (cart.products.price * (cart.products.offer)/100)}
+        </c:if>
+        </div>
           
            <div class="total-price">$${cart.totalprice}</div>
            </c:if>
-         <c:if test="${cart.products.quantity == 0 }">
+         <c:if test="${cart.products.quantity == 0 || not cart.products.status}">
+          <c:set var = "statusCheck"  value = "${statusCheck + 1}"/>    
           <div class="quantity">
           <h2 style="color: red;">Out Of Stack</h2>
           </div>
@@ -57,7 +70,15 @@
           <div class="total-price"><a href="${removeKart}/${cart.id}" style="text-decoration: none;">Remove</a></div>
       </div>
  </c:forEach>
-     </c:if>
+ 
+  <c:if test="${fn:length(cartList.cartitems) > 0 && fn:length(cartList.cartitems) != statusCheck }">
+  <div style="height: 70px;">
+ <h3 style="float: right;margin-right: 7em;">Grand Total : $${grandTotal} </h3>
+ </div>
+ </c:if>
+ 
+ 
+    </c:if>
  <c:if test="${fn:length(cartList.cartitems) == 0}">
  <div style="height: 100px;">
 <h1 style="color: red; text-align: center;">Your Shopping Cart is empty</h1>
@@ -65,6 +86,8 @@
  </c:if>
      
     </div>
-  
+    ${statusCheck}
+        <c:if test="${fn:length(cartList.cartitems) > 0 && fn:length(cartList.cartitems) != statusCheck }">
   <c:url value="/user/placeOrder" var="order"/>    
     <a href="${order}" class="btn btn-lg btn-success" style="float: right;">Place Order</a>
+    </c:if>

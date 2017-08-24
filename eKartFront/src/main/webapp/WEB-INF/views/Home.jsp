@@ -32,11 +32,15 @@
 	<c:when test="${adminClickedViewProduct == 'true'}">
 		<%@include file="/WEB-INF/views/ViewProduct.jsp"%>
 	</c:when>
-	
+				
 	
 	<c:when test="${userClickedMyKart == 'true'}">
 		<%@include file="/WEB-INF/views/myKart.jsp"%>
 	</c:when>
+	<c:when test="${placeOrderClicked == 'true'}">
+		<%@include file="/WEB-INF/views/Shipping.jsp"%>
+		</c:when>
+	
 	<c:otherwise>
 		<%@include file="/WEB-INF/views/Carousel.jsp"%>
 		<%@include file="/WEB-INF/views/listOfItems.jsp"%>

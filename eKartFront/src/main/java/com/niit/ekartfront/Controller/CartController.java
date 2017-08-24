@@ -94,6 +94,7 @@ public class CartController {
 		System.out.println("username ::::::::::::::::" + username);
 		Customer customer = customerservice.getByUserName(username);
 		Cart cart = customer.getCart();
+		int cartTotal = 0 ;
 		/*	int i = cart.getCartId();
 		System.out.println("=======================");
 		System.out.println(cart.getgTotal());
@@ -117,11 +118,17 @@ public class CartController {
 		
 		List<CartItem> cartItems = cart.getCartitems();
 		
+		
+		
 		for (CartItem cartItem : cartItems) {
-			  
 			
-		if(cartItem.getProducts().getQuantity() > 0){
+			int offerPrice = 0;
+			int offer = 0;
+			
+			/*stack checking*/
+		if(cartItem.getProducts().getQuantity() > 0 && cartItem.getProducts().isStatus()){
 				
+			/*product qty lessthan cart qty*/
 				if(cartItem.getQuantity() > cartItem.getProducts().getQuantity()){
 					
 					int qty = cartItem.getQuantity() - cartItem.getProducts().getQuantity();
@@ -133,25 +140,61 @@ public class CartController {
 					mv.addObject("product", "we have only "+ cartItem.getProducts().getQuantity()  +" quantity of " + cartItem.getProducts().getProductName() +" available in Stock");
 					
 				}
-				
+			/*	
 				if(cartItem.getQuantity() == 0){
 					cartItem.setQuantity(1);
 					cartItem.setTotalprice(cartItem.getProducts().getPrice());
 					cart.setgTotal(cart.getgTotal() + cartItem.getProducts().getPrice());
 					cartItemservice.save(cartItem);
 				}
-				
+				*/
 				
 				
 		}
-	/*if(cartItem.getProducts().getQuantity() == 0){
-		cartItems.remove(cartItem);
-		cartItems.add(cartItem);
+		
+	if(cartItem.getProducts().getQuantity() == 0){
+		System.out.println("============================================================================================================================");
+		 int qty = cartItem.getQuantity();
+		 double price = qty * cartItem.getProducts().getPrice();
+		 System.out.println(price);
+		 cartItem.setQuantity(qty);
+		 cartItem.setTotalprice(price);
+		 System.out.println(cart.getgTotal());
+		 cart.setgTotal(cart.getgTotal() - price);
+		 cartItem.setCart(cart);
+			System.out.println("============================================================================================================================");
+		 cartItemservice.save(cartItem);
+		 System.out.println(cart.getgTotal());
 	}
-		*/	
 			
+		/*offer starting*/
+			
+	/*	if(cartItem.getProducts().getOffer() > 0){*/
+			offer = (int) ((cartItem.getProducts().getOffer()/100 ) * cartItem.getProducts().getPrice());
+			offerPrice = (int)(cartItem.getProducts().getPrice() - offer);
+			
+			System.out.println("--"+cartItem.getProducts().getPrice()+"----"+(cartItem.getProducts().getOffer()/100 )+"----"+
+			cartItem.getProducts().getPrice()+"----"+((cartItem.getProducts().getOffer()/100 ) * cartItem.getProducts().getPrice()));
+			
+			System.out.println("OFFERPRICE" + offerPrice);
+		
+			
+		/*	cart.setgTotal(cart.getgTotal()  - (cartItem.getQuantity() * offer));*/
+			
+			cartTotal = cartTotal + (cartItem.getQuantity() * offerPrice);
+			cart.setgTotal(cartTotal);
+			cartItem.setTotalprice(cartItem.getQuantity() * offerPrice);
+			cartItemservice.save(cartItem);
+			System.out.println("OFFERPRICE" + offerPrice + ";;;;; TOTALCARTPRICE" + cart.getgTotal() + ";;;;;    CARTITEMPRICE" + cartItem.getTotalprice());
+		
+		
+		/*offer ending*/ 
+		
 		}
 	
+	
+	
+	/*maximam(plus) and minimum(minus) qty condiotn*/
 		Product ops = (Product) session.getAttribute("ops");
 		if(ops != null){
 			
@@ -168,6 +211,8 @@ public class CartController {
 			}		
 			
 		}
+		/*maximam(plus) and minimum(minus) qty condiotn*/
+		
 		mv.addObject("cartList", cart);
 		mv.addObject("userClickedMyKart", "true");
 		session.removeAttribute("ops");
@@ -254,12 +299,17 @@ public class CartController {
 		
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Customer customer = customerservice.getByUserName(user.getUsername());
-
+		
 		Cart cart = customer.getCart();
 		List<CartItem> cartItems = cart.getCartitems();
 		for (CartItem cartItem : cartItems) {
+			int offerPrice = 0;
+			int offer = 0;
+			
 			if(cartItem.getId() == cartItemId){
-				cart.setgTotal(cart.getgTotal() - (cartItem.getQuantity() * cartItem.getProducts().getPrice()));
+				offer = (int) ((cartItem.getProducts().getOffer()/100 ) * cartItem.getProducts().getPrice());
+				offerPrice = (int)(cartItem.getProducts().getPrice() - offer);
+				cart.setgTotal(cart.getgTotal() - (cartItem.getQuantity() * offerPrice));
 				cartItem.setCart(cart);
 				cartItemservice.save(cartItem);
 				cartItemservice.delete(cartItem);

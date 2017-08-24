@@ -24,11 +24,11 @@
 			<th ng-click="orderByMe('id')" class="text-left">More info</th>		
 			<th ng-click="orderByMe('id')" class="text-left">View Images</th>
 			 <th>Edit</th>
-             <th>Delete</th>
+             <th>Status</th>
 		</tr>
 	</thead>
 	<tbody class="table-hover">
-		<tr ng-repeat="item in result.data | orderBy:myOrderBy | filter:search">
+		<tr ng-repeat="item in resultss | orderBy:myOrderBy | filter:search">
 			<td class="text-center">{{item.id}}</td>
 			<td class="text-center">{{item.productName}}</td>
 			<td class="text-center">{{item.price}}</td>
@@ -41,7 +41,24 @@
 			<td ng-click="getDesc(item.id)" class="text-center" data-toggle="modal" data-target="#desc"><span class="glyphicon glyphicon-info-sign"></span></td>
 			<td ng-click="getImage(item)" class="text-center" data-toggle="modal" data-target="#image" id="btn1"><span class="glyphicon glyphicon-eye-open"></span></td>
 			 <td class="text-center"><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
-        <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td class="text-center">
+        
+       <!--  <div class="onoffswitch">
+    <input ng-click="mySwitch(item)" type="checkbox" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="item.status" />
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div> -->
+        <div class="switch">
+    <label>
+     <!--  Off -->
+      <input ng-change="mySwitch(item)" type="checkbox" ng-model="item.status">
+      <span class="lever"></span>
+     <!--  On -->
+    </label>
+  </div>
+        </td>
 		</tr>
 		
 	
@@ -116,9 +133,9 @@
   </script>
 <script type="text/javascript">
 	
-	 app.controller("ProductController",function($rootScope,$scope,$http){
+	 app.controller("ProductController",function($rootScope,$scope,$http,$q,$filter){
 		 		 
-		
+		 $scope.mySwitch = {};
 		$scope.getdata = function(){
 			$http({
 				method : 'GET',
@@ -126,6 +143,10 @@
 			}).then(function(data, status ,headers, config){
 				$scope.result = data;
 				console.log($scope.result)
+				$scope.results = $scope.result.data;
+				console.log($scope.results)
+				$scope.resultss = $filter('orderBy')($scope.results, 'id');
+				console.log($scope.resultss)
 				/* alert("success"); */
 			});
 		}
@@ -165,13 +186,32 @@
 				/* alert("success"); */
 			});
 		}
-		
+		 /* switch */
+		$scope.mySwitch = function(product){
+			console.log("calling create Blog")
+			return $http.post('../active', product) // 1
+			.then(function(response) {
+				console.log(response.data)
+				return response.data;
+				
+			}, function(errResponse) {
+				console.error('Error while creating Blog');
+				return $q.reject(errResponse);
+			});
+		}
 		$scope.orderByMe = function(x) {
 	        $scope.myOrderBy = x;
 	    }
 	}); 
 		
-		
+	 
+	 
+	
+	
+	 
+	
+				
+	 
 </script> 
  
 

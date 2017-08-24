@@ -43,7 +43,15 @@ public class HomeController {
 	
 	@RequestMapping({ "/", "/home" })
 	public String startingPage(Model model) {
-		model.addAttribute("listProduct", productService.list());
+		List<Product> productList = productService.list();
+		for (Product product : productList) {
+			if(product.getQuantity() == 0){
+				product.setStatus(false);
+				productService.saveOrUpdate(product);
+			}
+		}
+		
+		model.addAttribute("listProduct", productService.activeList());
 		return "Home";
 	}
 
@@ -104,7 +112,7 @@ public class HomeController {
 					productViewService.save(productView1);
 				}
 				else if (!productViewService.getByCustomerAndProductId(customer.getUserId(), id)){
-					
+					System.out.println("productViewService.getByCustomerAndProductId(customer.getUserId(), id)" +customer.getUserId() + "::::::" + id);
 					ProductView productView2 = new ProductView();
 					productView2.setUserId(customer.getUserId());
 					productView2.setProduct(product);
@@ -113,7 +121,7 @@ public class HomeController {
 					product.setViews(product.getViews() + 1);
 					productService.update(product);
 				}
-			}
+			} 
 				
 
 			if(productViews.size() != 0){

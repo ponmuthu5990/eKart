@@ -63,6 +63,11 @@
 		<link rel="stylesheet" type="text/css" href="${css}/myKart.css" />
 		</c:if>
 		
+		
+		<c:if test="${placeOrderClicked == 'true'}">
+		<link rel="stylesheet" type="text/css" href="${css}/shipping.css" />
+		</c:if>
+		
 		<c:if test="${not empty RecentlyViewed}">
 		<link rel="stylesheet" type="text/css" href="${css}/recentlyViewed.css" />
 		</c:if>
