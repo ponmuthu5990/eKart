@@ -1,17 +1,23 @@
 package com.niit.ekartback.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
@@ -58,6 +64,23 @@ public class Customer {
 	@Valid
 	private Cart cart;
 	
+	
+/*	org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags*/
+	@OneToMany(mappedBy = "customer",fetch=FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Shipping> shippings;
+	
+	
+	
+	
+	public List<Shipping> getShippings() {
+		return shippings;
+	}
+
+	public void setShippings(List<Shipping> shippings) {
+		this.shippings = shippings;
+	}
+
 	public int getUserId() {
 		return userId;
 	}

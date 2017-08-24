@@ -1,10 +1,14 @@
 package com.niit.ekartback.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
@@ -21,8 +25,26 @@ public class Shipping {
 	private String address; 
 	
 	@NotEmpty
-	private String zipcode;
+	private String username;
+	
+	@NotEmpty
+	private String zpiCode;
+	
+	@NotEmpty
+	@Size(min = 10, max = 10)
+	private String phone;
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "cid")
+	private Customer customer;
 
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public int getId() {
 		return id;
 	}
@@ -35,11 +57,24 @@ public class Shipping {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getZipcode() {
-		return zipcode;
+	public String getZpiCode() {
+		return zpiCode;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setZpiCode(String zpiCode) {
+		this.zpiCode = zpiCode;
 	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	
 }

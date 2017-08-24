@@ -12,9 +12,12 @@ public interface ProductDAO {
 	
 	public List<Product> list();
 	
+	public List<Product> activeList();
+	
 	public void delete(Product product);
 	
 	public Product getByProductId(String productId);
 	
+	public Product saveOrUpdate(Product product);
 	
 }

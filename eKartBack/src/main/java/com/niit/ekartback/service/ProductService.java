@@ -12,7 +12,11 @@ public interface ProductService {
 	
 	public List<Product> list();
 	
+	public List<Product> activeList();
+	
 	public void delete(Product product);
 	
 	public Product getByProductId(String id);
+	
+	public Product saveOrUpdate(Product product);
 }

@@ -22,6 +22,7 @@ import com.niit.ekartback.model.Product;
 import com.niit.ekartback.model.ProductDesc;
 import com.niit.ekartback.model.ProductView;
 import com.niit.ekartback.model.Role;
+import com.niit.ekartback.model.Shipping;
 import com.niit.ekartback.model.Supplier;
 import com.niit.ekartback.model.User;
 
@@ -69,7 +70,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Cart.class);
 		sessionBuilder.addAnnotatedClass(CartItem.class);
 		
-		
+		sessionBuilder.addAnnotatedClass(Shipping.class);
 
 		// sessionBuilder.scanPackages("com.niit");
 		return sessionBuilder.buildSessionFactory();

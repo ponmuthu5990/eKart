@@ -41,4 +41,14 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.getByProductId(productId);
 	}
 
+	public Product saveOrUpdate(Product product) {
+	
+		return productDAO.saveOrUpdate(product);
+	}
+
+	public List<Product> activeList() {
+		// TODO Auto-generated method stub
+		return productDAO.activeList();
+	}
+
 }

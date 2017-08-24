@@ -48,7 +48,7 @@ public class ProductViewDAOImpl implements ProductViewDAO {
 
 	public boolean getByCustomerAndProductId(int userId, String pid) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ProductView where userId = '" + userId +"' and pid = '" + pid + "'";
+		String hql = "from ProductView where userId = '" + userId +"' and product.id = '" + pid + "'";
 		Query query = session.createQuery(hql);
 		List<ProductView> productViews = query.list();		
 		if (productViews != null && !productViews.isEmpty()) {
