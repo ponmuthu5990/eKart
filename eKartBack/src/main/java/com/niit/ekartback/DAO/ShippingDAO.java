@@ -4,11 +4,11 @@ import com.niit.ekartback.model.Shipping;
 
 public interface ShippingDAO {
 
-	public void save(Shipping shipping);
+	public void save(Shipping shipment);
 
-	public void update(Shipping shipping);
+	public void update(Shipping shipment);
 
-	public Shipping delete(Shipping shipping);
+	public Shipping delete(Shipping shipment);
 
 	public Shipping getByShippingId(int id);
 }

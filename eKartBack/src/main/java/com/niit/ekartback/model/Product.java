@@ -1,9 +1,11 @@
 package com.niit.ekartback.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -35,7 +38,10 @@ public class Product implements Serializable {
 	private String id;
 
 	@NotEmpty(message = "Product name should not be empty")
-	/*@Pattern(regexp = "[a-zA-Z0-9.]*", message = "the name can only contain letters")*/
+	/*
+	 * @Pattern(regexp = "[a-zA-Z0-9.]*", message =
+	 * "the name can only contain letters")
+	 */
 	private String productName;
 
 	@Min(value = 50)
@@ -76,24 +82,41 @@ public class Product implements Serializable {
 
 	@OneToMany(mappedBy = "product")
 	private List<ProductView> productViews;
-	
+
+	@OneToMany(mappedBy = "product")
+	private List<CustomerOrderItem> customerOrderItems;
+
+	@Generated(value = { "" })
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
+
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
+
 	public Product() {
 		this.productCode = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 
-	
-	
+	public List<CustomerOrderItem> getCustomerOrderItems() {
+		return customerOrderItems;
+	}
+
+	public void setCustomerOrderItems(List<CustomerOrderItem> customerOrderItems) {
+		this.customerOrderItems = customerOrderItems;
+	}
+
 	public List<ProductView> getProductViews() {
 		return productViews;
 	}
 
-
-
 	public void setProductViews(List<ProductView> productViews) {
 		this.productViews = productViews;
 	}
-
-
 
 	public List<ProductDesc> getProductDescs() {
 		return productDescs;

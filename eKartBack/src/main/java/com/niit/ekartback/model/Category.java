@@ -1,12 +1,15 @@
 package com.niit.ekartback.model;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 import org.springframework.stereotype.Component;
 
@@ -27,7 +30,9 @@ public class Category {
 	@OneToMany(mappedBy = "category")
 	private List<Product> products;
 
-	
+	@Generated(value = { "" })
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
 	
 	
 	public boolean isStatus() {
@@ -68,6 +73,13 @@ public class Category {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
 	}
 
 }

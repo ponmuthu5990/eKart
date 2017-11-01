@@ -1,13 +1,16 @@
 package com.niit.ekartback.model;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 import org.springframework.stereotype.Component;
 
@@ -31,7 +34,17 @@ public class Supplier {
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;
 
+	@Generated(value = { "" })
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
 	
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
 	
 	public boolean isStatus() {
 		return status;

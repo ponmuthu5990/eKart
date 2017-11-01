@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.ekartback.DAO.ShippingDAO;
+import com.niit.ekartback.model.Shipment;
 import com.niit.ekartback.model.Shipping;
 
 @Service
@@ -31,5 +32,7 @@ public class ShippingServiceImpl implements ShippingService {
 		// TODO Auto-generated method stub
 		return shippingDAO.delete(shipping);
 	}
+
+	
 
 }

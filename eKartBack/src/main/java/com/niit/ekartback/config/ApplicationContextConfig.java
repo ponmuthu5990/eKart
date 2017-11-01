@@ -18,10 +18,13 @@ import com.niit.ekartback.model.Cart;
 import com.niit.ekartback.model.CartItem;
 import com.niit.ekartback.model.Category;
 import com.niit.ekartback.model.Customer;
+import com.niit.ekartback.model.CustomerOrder;
+import com.niit.ekartback.model.CustomerOrderItem;
 import com.niit.ekartback.model.Product;
 import com.niit.ekartback.model.ProductDesc;
 import com.niit.ekartback.model.ProductView;
 import com.niit.ekartback.model.Role;
+import com.niit.ekartback.model.Shipment;
 import com.niit.ekartback.model.Shipping;
 import com.niit.ekartback.model.Supplier;
 import com.niit.ekartback.model.User;
@@ -69,9 +72,10 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Customer.class);
 		sessionBuilder.addAnnotatedClass(Cart.class);
 		sessionBuilder.addAnnotatedClass(CartItem.class);
-		
+		sessionBuilder.addAnnotatedClass(CustomerOrder.class);
+		sessionBuilder.addAnnotatedClass(CustomerOrderItem.class);
 		sessionBuilder.addAnnotatedClass(Shipping.class);
-
+		sessionBuilder.addAnnotatedClass(Shipment.class);
 		// sessionBuilder.scanPackages("com.niit");
 		return sessionBuilder.buildSessionFactory();
 	}

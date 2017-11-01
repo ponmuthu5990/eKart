@@ -2,7 +2,6 @@ package com.niit.ekartback.model;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,14 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table(name = "CartItem")
-public class CartItem {
+@Table(name = "CustomerOrderItem")
+public class CustomerOrderItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +24,21 @@ public class CartItem {
 
 	@ManyToOne
 	@JoinColumn(name = "pid")
-	private Product products;
+	private Product product;
 
 	private int quantity;
 
 	private double totalprice;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "cartId")
-	private Cart cart;
+	@JoinColumn(name = "orderId")
+	private CustomerOrder customerOrder;
 
-	@Generated(value = { "" })
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
+	@ManyToOne
+	@JoinColumn(name = "shipId")
+	private Shipment shipment;
+
+	private String status;
 
 	public int getId() {
 		return id;
@@ -48,12 +48,12 @@ public class CartItem {
 		this.id = id;
 	}
 
-	public Product getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProducts(Product products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getQuantity() {
@@ -72,20 +72,28 @@ public class CartItem {
 		this.totalprice = totalprice;
 	}
 
-	public Cart getCart() {
-		return cart;
+	public CustomerOrder getCustomerOrder() {
+		return customerOrder;
 	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
+	public void setCustomerOrder(CustomerOrder customerOrder) {
+		this.customerOrder = customerOrder;
 	}
 
-	public Date getAddDate() {
-		return addDate;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setAddDate(Date addDate) {
-		this.addDate = addDate;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Shipment getShipment() {
+		return shipment;
+	}
+
+	public void setShipment(Shipment shipment) {
+		this.shipment = shipment;
 	}
 
 }

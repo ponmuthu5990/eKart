@@ -1,7 +1,9 @@
 package com.niit.ekartback.model;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
@@ -46,6 +49,12 @@ public class Customer {
 	@Email
 	private String email;
 
+	
+	
+	@Generated(value = { "" })
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
+	
 	@NotEmpty
 	@Size(min = 10, max = 10)
 	private String phone;
@@ -58,21 +67,28 @@ public class Customer {
 	@JoinColumn(name = "usersId")
 	private User user;
 
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cartId")
 	@Valid
 	private Cart cart;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "orderId")
+	@Valid
+	private CustomerOrder customerOrder;
+
 	
+	@OneToMany(mappedBy = "customer")
+	private List<Shipment> shipments;
 	
-/*	org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags*/
-	@OneToMany(mappedBy = "customer",fetch=FetchType.EAGER)
+	/*
+	 * org.hibernate.loader.MultipleBagFetchException: cannot simultaneously
+	 * fetch multiple bags
+	 */
+	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Shipping> shippings;
-	
-	
-	
-	
+
 	public List<Shipping> getShippings() {
 		return shippings;
 	}
@@ -161,5 +177,12 @@ public class Customer {
 		this.cart = cart;
 	}
 
-	
+	public CustomerOrder getCustomerOrder() {
+		return customerOrder;
+	}
+
+	public void setCustomerOrder(CustomerOrder customerOrder) {
+		this.customerOrder = customerOrder;
+	}
+
 }

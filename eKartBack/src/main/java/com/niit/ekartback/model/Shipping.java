@@ -1,5 +1,9 @@
 package com.niit.ekartback.model;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -38,6 +44,20 @@ public class Shipping {
 	@JoinColumn(name = "cid")
 	private Customer customer;
 
+	@Generated(value = { "" })
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
+	
+	@OneToMany(mappedBy = "shipping")
+	private List<Shipment> shipments;
+	
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
 	
 	public Customer getCustomer() {
 		return customer;
