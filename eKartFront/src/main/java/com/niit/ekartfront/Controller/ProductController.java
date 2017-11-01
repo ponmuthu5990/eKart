@@ -53,6 +53,7 @@ public class ProductController {
 	public String viewProductPage(Model model) {
 			
 		model.addAttribute("adminClickedViewProduct", "true");
+		model.addAttribute("title", "Product Table");
 		return "Home";
 	}
 
@@ -71,6 +72,7 @@ public class ProductController {
 			product.getSupplier().setProducts(null);
 			product.setProductDescs(null);
 			product.setProductViews(null);
+			product.setCustomerOrderItems(null);
 		}
 		/*System.out.println(listProduct.size());
 		System.out.println(listProduct.get(0).getProductName());*/
@@ -101,6 +103,7 @@ public class ProductController {
 		
 		product.setProductDescs(null);
 		product.setProductViews(null);
+		product.setCustomerOrderItems(null);
 		return product;
 		
 	}
@@ -146,6 +149,7 @@ public class ProductController {
 			productDesc.getProduct().setProductCode(product.getProductCode());*/
 			productDesc.getProduct().setProductDescs(null);
 			productDesc.getProduct().setProductViews(null);
+			productDesc.getProduct().setCustomerOrderItems(null);
 			/*productDesc.getProduct().setQuantity(product.getQuantity());
 			productDesc.getProduct().setStatus(false);
 			productDesc.getProduct().setUrl(product.getUrl());*/
@@ -203,6 +207,7 @@ public class ProductController {
 		model.addAttribute("supplierList", supplierService.list());
 		model.addAttribute("product", new Product());
 		model.addAttribute("adminClickedAddProduct", "true");
+		model.addAttribute("title", "Product Form");
 		return "Home";
 
 	}

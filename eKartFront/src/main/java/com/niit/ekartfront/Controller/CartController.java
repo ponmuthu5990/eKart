@@ -19,9 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.niit.ekartback.model.Cart;
 import com.niit.ekartback.model.CartItem;
 import com.niit.ekartback.model.Customer;
+import com.niit.ekartback.model.CustomerOrder;
+import com.niit.ekartback.model.CustomerOrderItem;
 import com.niit.ekartback.model.Product;
 
 import com.niit.ekartback.service.CartItemService;
+import com.niit.ekartback.service.CustomerOrderItemService;
 import com.niit.ekartback.service.CustomerService;
 import com.niit.ekartback.service.ProductService;
 
@@ -37,6 +40,9 @@ public class CartController {
 	@Autowired
 	private CartItemService cartItemservice;
 
+	@Autowired
+	private CustomerOrderItemService customerorderItemService;
+	
 	@RequestMapping("/user/addToCart/{id}")
 	public String addToCart(@PathVariable(value = "id") String id,HttpSession session,Model model) {
 		Product product = productservice.getByProductId(id);
@@ -95,6 +101,25 @@ public class CartController {
 		Customer customer = customerservice.getByUserName(username);
 		Cart cart = customer.getCart();
 		int cartTotal = 0 ;
+		
+		CustomerOrder customerOrder = customer.getCustomerOrder();
+		List<CustomerOrderItem> customerOrderItems = customerOrder.getCustomerOrderItems();
+		
+		if(customerOrderItems.size()>0){
+			for (CustomerOrderItem customerOrderItem : customerOrderItems) {
+				if(customerOrderItem.getStatus().equals("PENDING")){
+					customerOrder.setgTotal(0);
+					customerOrderItem.setCustomerOrder(customerOrder);
+					customerorderItemService.save(customerOrderItem);
+					customerorderItemService.delete(customerOrderItem);
+				}
+				
+			}
+			
+			
+		}
+		
+		
 		/*	int i = cart.getCartId();
 		System.out.println("=======================");
 		System.out.println(cart.getgTotal());
@@ -215,6 +240,7 @@ public class CartController {
 		
 		mv.addObject("cartList", cart);
 		mv.addObject("userClickedMyKart", "true");
+		mv.addObject("title", "MyCart");
 		session.removeAttribute("ops");
 		return mv;
 		

@@ -40,7 +40,21 @@
 	<c:when test="${placeOrderClicked == 'true'}">
 		<%@include file="/WEB-INF/views/Shipping.jsp"%>
 		</c:when>
-	
+	<c:when test="${orderItemList == 'true'}">
+		<%@include file="/WEB-INF/views/Ordered.jsp"%>
+	</c:when>
+	<c:when test="${paymentPage == 'true'}">
+		<%@include file="/WEB-INF/views/Payment.jsp"%>
+	</c:when>
+	<c:when test="${invoicePage == 'true'}">
+		<%@include file="/WEB-INF/views/Invoice.jsp"%>
+	</c:when>
+	<c:when test="${orderTrackPage == 'true'}">
+		<%@include file="/WEB-INF/views/TrackOrder.jsp"%>
+	</c:when>
+	<c:when test="${purchaseHistoryPage == 'true'}">
+		<%@include file="/WEB-INF/views/purchaseHistory.jsp"%>
+	</c:when>
 	<c:otherwise>
 		<%@include file="/WEB-INF/views/Carousel.jsp"%>
 		<%@include file="/WEB-INF/views/listOfItems.jsp"%>

@@ -20,6 +20,7 @@ public class SupplierController {
 	@RequestMapping("/admin/supplierForm")
 	public String categoryForm(Model model) {
 		model.addAttribute("adminClickedAddSupplier", "true");
+		model.addAttribute("title", "Supplier Form");
 		return "Home";
 	}
 
@@ -28,6 +29,7 @@ public class SupplierController {
 		List<Supplier> supplierList = supplierService.list();
 		model.addAttribute("supplierList", supplierList);
 		model.addAttribute("adminClickedViewSupplier", "true");
+		model.addAttribute("title", "Supplier Table");
 		return "Home";
 	}
 

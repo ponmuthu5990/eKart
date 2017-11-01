@@ -13,10 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.niit.ekartback.DAO.ShippingDAO;
 import com.niit.ekartback.model.Cart;
 import com.niit.ekartback.model.CartItem;
 import com.niit.ekartback.model.Customer;
+import com.niit.ekartback.model.CustomerOrder;
 import com.niit.ekartback.model.Role;
 import com.niit.ekartback.model.Shipping;
 import com.niit.ekartback.model.User;
@@ -72,6 +72,10 @@ public class CustomerController {
 		cart.setCustomer(customer);
 		customer.setCart(cart);
 		
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setCustomer(customer);
+		customer.setCustomerOrder(customerOrder);
+		
 		customerservice.save(customer);
 		roleService.save(role);
 		shippingService.save(shipping);
@@ -104,7 +108,7 @@ public class CustomerController {
 	        
 	        mailSender.send(email);
 	        
-		return "Home";
+		return "redirect:/all/signIn";
 		
 		
 	}

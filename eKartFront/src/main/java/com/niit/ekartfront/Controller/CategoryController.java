@@ -22,6 +22,7 @@ public class CategoryController {
 	public String categoryForm(Model model) {
 		model.addAttribute("adminClickedAddCategory", "true");
 		model.addAttribute("category", new Category());
+		model.addAttribute("title", "AddCategory");
 		return "Home";
 	}
 	
@@ -30,19 +31,16 @@ public class CategoryController {
 		List<Category> categoryList = categorySerive.list();
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("adminClickedViewCategory", "true");
+		model.addAttribute("title", "ListOfCategory");
 		return "Home";
 	}
 	
 	@RequestMapping("/admin/newCategory")
-	public String addCategory(@ModelAttribute Category category, Model model) {
-		
-		
-			categorySerive.save(category);
-	
-	
-		
+	public String addCategory(@ModelAttribute Category category, Model model) {		
+			categorySerive.save(category);		
 		return "redirect:/admin/categoryTable";
 	}
+	
 	@RequestMapping("/admin/deleteCategory/{categoryId}")
 	public String deleteCategory(@PathVariable("categoryId") int categoryId){
 		Category category = categorySerive.getByCategoryId(categoryId);
@@ -55,6 +53,7 @@ public class CategoryController {
 		Category category = categorySerive.getByCategoryId(categoryId);
 		model.addAttribute("category", category);
 		model.addAttribute("adminClickedAddCategory", "true");
+		model.addAttribute("title", "EditCategory");
 		return "Home";
 	}
 }

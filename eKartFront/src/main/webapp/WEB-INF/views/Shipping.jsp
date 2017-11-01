@@ -17,7 +17,7 @@
 				<li><span class="uppercase">${shipping.address}</span></li>
 				<li>${shipping.zpiCode}</li>
 			</ul>
-			<a href="${deleverHere}/${shipping.id}" class="button">Deliver Here</a>
+			<a href="${deleverHere}?shippingId=${shipping.id}" class="button">Deliver Here</a>
 		</div>
 	</c:forEach>
 	

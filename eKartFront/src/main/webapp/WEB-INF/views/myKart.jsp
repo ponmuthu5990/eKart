@@ -86,7 +86,7 @@
  </c:if>
      
     </div>
-    ${statusCheck}
+  <%--   ${statusCheck} --%>
         <c:if test="${fn:length(cartList.cartitems) > 0 && fn:length(cartList.cartitems) != statusCheck }">
   <c:url value="/user/placeOrder" var="order"/>    
     <a href="${order}" class="btn btn-lg btn-success" style="float: right;">Place Order</a>

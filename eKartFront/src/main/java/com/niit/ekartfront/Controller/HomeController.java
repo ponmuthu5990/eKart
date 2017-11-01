@@ -1,8 +1,10 @@
 package com.niit.ekartfront.Controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.niit.ekartback.model.Cart;
 import com.niit.ekartback.model.CartItem;
 import com.niit.ekartback.model.Customer;
+import com.niit.ekartback.model.CustomerOrderItem;
 import com.niit.ekartback.model.Product;
 import com.niit.ekartback.model.ProductView;
+import com.niit.ekartback.model.Shipment;
+import com.niit.ekartback.service.CustomerOrderItemService;
 import com.niit.ekartback.service.CustomerService;
 import com.niit.ekartback.service.ProductDescService;
 import com.niit.ekartback.service.ProductService;
 import com.niit.ekartback.service.ProductViewService;
+import com.niit.ekartback.service.ShipmentService;
 
 @Controller
 public class HomeController {
@@ -41,6 +47,10 @@ public class HomeController {
 	@Autowired
 	private CustomerService customerservice;
 	
+	@Autowired
+	private ShipmentService shipmentService;
+	
+	@SuppressWarnings("deprecation")
 	@RequestMapping({ "/", "/home" })
 	public String startingPage(Model model) {
 		List<Product> productList = productService.list();
@@ -51,10 +61,30 @@ public class HomeController {
 			}
 		}
 		
+		    
+		List<Shipment> shipments = shipmentService.shimentDetails();
+		for (Shipment shipment : shipments) {
+		
+			Date date = new Date();			
+			Date end = shipment.getDeliveryDate();			
+			long diff = end.getTime() - date.getTime();
+			int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+			System.out.println(date + "=-=-=-=-=-=-=-="+end+"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-"+diff+"=-=-=-=-=-=--=-=-=-=-=-"+diffDays);
+			shipment.setDays(diffDays);
+			shipmentService.update(shipment);
+			
+			if(shipment.getDays() == -1){
+				shipment.setStatus("DELIVERED");
+				shipmentService.update(shipment);
+			}
+			
+		}
+		model.addAttribute("title", "Home");
 		model.addAttribute("listProduct", productService.activeList());
 		return "Home";
 	}
 
+	
 	@RequestMapping("/all/signIn")
 	public String signInPage(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, Model model) {
@@ -66,6 +96,7 @@ public class HomeController {
 		if (logout != null) {
 			model.addAttribute("logout", "Logged out Successfully");
 		}
+		model.addAttribute("title", "SignIn");
 		model.addAttribute("logInClicked", "true");
 		return "Home";
 	}
@@ -74,6 +105,7 @@ public class HomeController {
 	public String signUPPage(Model model) {
 		model.addAttribute("SignUpInClicked", "true");
 		model.addAttribute("customer", new Customer());
+		model.addAttribute("title", "SignUp");
 		return "Home";
 	}
 
@@ -182,7 +214,7 @@ public class HomeController {
 			model.addAttribute("noOfImg", noOfImg);
 			model.addAttribute("product", product);
 			model.addAttribute("userClickedProduct", "true");
-	
+			model.addAttribute("title", "Product Details");
 	
 		return "Home";
 
