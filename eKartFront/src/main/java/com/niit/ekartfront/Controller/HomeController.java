@@ -1,8 +1,6 @@
 package com.niit.ekartfront.Controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,11 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.niit.ekartback.model.Cart;
 import com.niit.ekartback.model.CartItem;
 import com.niit.ekartback.model.Customer;
-import com.niit.ekartback.model.CustomerOrderItem;
 import com.niit.ekartback.model.Product;
 import com.niit.ekartback.model.ProductView;
 import com.niit.ekartback.model.Shipment;
-import com.niit.ekartback.service.CustomerOrderItemService;
 import com.niit.ekartback.service.CustomerService;
 import com.niit.ekartback.service.ProductDescService;
 import com.niit.ekartback.service.ProductService;

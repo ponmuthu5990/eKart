@@ -1,7 +1,6 @@
 package com.niit.ekartfront.Controller;
 
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.ekartback.model.Cart;
@@ -22,7 +20,6 @@ import com.niit.ekartback.model.Customer;
 import com.niit.ekartback.model.CustomerOrder;
 import com.niit.ekartback.model.CustomerOrderItem;
 import com.niit.ekartback.model.Product;
-
 import com.niit.ekartback.service.CartItemService;
 import com.niit.ekartback.service.CustomerOrderItemService;
 import com.niit.ekartback.service.CustomerService;
