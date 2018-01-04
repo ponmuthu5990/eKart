@@ -29,7 +29,7 @@ public class Supplier {
 
 	private String phone;
 
-	private boolean status;
+	private boolean status;     
 	
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;

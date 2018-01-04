@@ -33,6 +33,8 @@ import com.niit.ekartback.model.User;
 @ComponentScan("com.niit.*")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
+	
+	
 	@Autowired
 	@Bean(name = "dataSource")
 	public DataSource getH2DataSource() {

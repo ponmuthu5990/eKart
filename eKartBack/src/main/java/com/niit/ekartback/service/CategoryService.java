@@ -12,6 +12,6 @@ public interface CategoryService {
 	public List<Category> list();
 	
 	public void delete(Category category);
-	
+	     
 	public Category getByCategoryId(int categoryId);
 }

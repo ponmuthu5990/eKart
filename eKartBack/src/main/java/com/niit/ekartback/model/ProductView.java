@@ -18,7 +18,7 @@ public class ProductView {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
-
+     
 	private int userId;
 
 	@ManyToOne

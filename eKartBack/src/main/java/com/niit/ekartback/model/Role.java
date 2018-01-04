@@ -24,7 +24,7 @@ public class Role {
 	private int userId;
 
 	private String username;
-
+     
 	private String role;
 
 	@OneToOne(cascade = CascadeType.ALL)

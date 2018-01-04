@@ -26,15 +26,14 @@ public class Category {
 	private String desc;
 
 	private boolean status;
-	
+
 	@OneToMany(mappedBy = "category")
 	private List<Product> products;
 
 	@Generated(value = { "" })
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
-	
-	
+
 	public boolean isStatus() {
 		return status;
 	}
@@ -74,6 +73,7 @@ public class Category {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
 	public Date getAddDate() {
 		return addDate;
 	}

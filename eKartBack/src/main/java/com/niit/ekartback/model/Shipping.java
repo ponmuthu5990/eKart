@@ -29,7 +29,7 @@ public class Shipping {
 	private int id;
 	@NotEmpty
 	private String address; 
-	
+	    
 	@NotEmpty
 	private String username;
 	

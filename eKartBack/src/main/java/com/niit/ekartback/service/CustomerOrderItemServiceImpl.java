@@ -11,7 +11,7 @@ import com.niit.ekartback.model.CustomerOrderItem;
 
 @Service
 @Transactional
-public class CustomerOrderItemServiceImpl implements CustomerOrderItemService{
+public class CustomerOrderItemServiceImpl implements CustomerOrderItemService {
 	@Autowired
 	private CustomerOrderItemDAO customerOrderItemDAO;
 
@@ -28,6 +28,7 @@ public class CustomerOrderItemServiceImpl implements CustomerOrderItemService{
 		customerOrderItemDAO.deleteAll();
 
 	}
+
 	public void saveOrUpdate(CustomerOrderItem customerOrderItem) {
 		customerOrderItemDAO.saveOrUpdate(customerOrderItem);
 	}

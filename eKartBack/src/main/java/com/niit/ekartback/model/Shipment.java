@@ -2,7 +2,6 @@ package com.niit.ekartback.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +24,7 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int shipmentId;
 
-	@ManyToOne
+	@ManyToOne    
 	@JoinColumn(name = "sid")
 	private Shipping shipping;
 

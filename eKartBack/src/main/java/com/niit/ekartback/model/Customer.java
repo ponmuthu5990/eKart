@@ -49,12 +49,10 @@ public class Customer {
 	@Email
 	private String email;
 
-	
-	
 	@Generated(value = { "" })
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date addDate = new java.sql.Date(new java.util.Date().getTime());
-	
+
 	@NotEmpty
 	@Size(min = 10, max = 10)
 	private String phone;
@@ -77,13 +75,12 @@ public class Customer {
 	@Valid
 	private CustomerOrder customerOrder;
 
-	
 	@OneToMany(mappedBy = "customer")
 	private List<Shipment> shipments;
-	
+
 	/*
-	 * org.hibernate.loader.MultipleBagFetchException: cannot simultaneously
-	 * fetch multiple bags
+	 * org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch
+	 * multiple bags
 	 */
 	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
