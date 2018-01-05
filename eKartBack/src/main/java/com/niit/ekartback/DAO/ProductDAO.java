@@ -19,5 +19,7 @@ public interface ProductDAO {
 	public Product getByProductId(String productId);
 	
 	public Product saveOrUpdate(Product product);
+
 	
 }
+

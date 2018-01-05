@@ -15,4 +15,6 @@ public interface RoleDAO {
 	public void delete(Role role);
 	
 	public Role getByUserId(int userId);
+	
+	
 }

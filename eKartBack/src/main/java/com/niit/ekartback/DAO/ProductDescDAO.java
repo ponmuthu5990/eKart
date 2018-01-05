@@ -13,5 +13,7 @@ public interface ProductDescDAO {
 	
 	public void delete(ProductDesc productDesc);
 	
+	
+	
 	public ProductDesc getByProductDescId(String descId);
 }

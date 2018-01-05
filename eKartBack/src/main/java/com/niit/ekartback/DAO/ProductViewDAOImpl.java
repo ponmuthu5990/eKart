@@ -27,6 +27,7 @@ public class ProductViewDAOImpl implements ProductViewDAO {
 		session.update(productView);
 	}
 
+	
 	public List<ProductView> list(int userId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql ="from ProductView where userId = '" + userId + "'";

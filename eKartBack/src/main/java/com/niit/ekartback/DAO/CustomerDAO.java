@@ -9,4 +9,5 @@ public interface CustomerDAO {
 	public void update(Customer customer);
 
 	public Customer getByUserName(String username);
+	
 }

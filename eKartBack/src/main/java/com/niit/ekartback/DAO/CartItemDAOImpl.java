@@ -28,8 +28,7 @@ public class CartItemDAOImpl implements CartItemDAO{
 	}
 
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	public void saveOrUpdate(CartItem cartItem) {

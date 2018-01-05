@@ -39,6 +39,8 @@ public class RoleDAOImpl implements RoleDAO{
 		session.delete(role);
 	}
 
+	
+	
 	public Role getByUserId(int userId) {
 		Session session=sessionFactory.getCurrentSession();
 		Role role=(Role) session.get(Category.class, userId);

@@ -17,4 +17,6 @@ public interface ProductViewDAO {
 	public ProductView getByProductViewId(String descId);
 	
 	public boolean getByCustomerAndProductId(int userId, String id);
+	
+	
 }

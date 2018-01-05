@@ -20,16 +20,14 @@ public class ShipmentDAOImpl implements ShipmentDAO {
 
 	public Shipment save(Shipment shipment) {
 		Session session = sessionFactory.getCurrentSession();
-
 		session.save(shipment);
 		return shipment;
 	}
 
 	public void update(Shipment shipment) {
 		Session session = sessionFactory.getCurrentSession();
-
 		session.update(shipment);
-		
+
 	}
 
 	public Shipment delete(Shipment shipment) {
@@ -63,7 +61,8 @@ public class ShipmentDAOImpl implements ShipmentDAO {
 
 	public Shipment getByCustomerId(int userId) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Shipment where customer.userId= '" + userId + "'and status = 'DELIVERED'");
+		Query query = session
+				.createQuery("from Shipment where customer.userId= '" + userId + "'and status = 'DELIVERED'");
 		// query.setString(0,username);
 		Shipment shipment = (Shipment) query.uniqueResult();
 		return shipment;

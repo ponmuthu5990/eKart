@@ -7,6 +7,9 @@ public interface CartItemDAO {
 	public void save(CartItem cartItem);
 	
 	public void delete(CartItem cartItem);
+
+
+	
 	
 	public void deleteAll();
 	

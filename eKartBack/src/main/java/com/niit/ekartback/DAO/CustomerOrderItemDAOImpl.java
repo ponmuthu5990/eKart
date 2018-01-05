@@ -33,8 +33,7 @@ public class CustomerOrderItemDAOImpl implements CustomerOrderItemDAO{
 	}
 
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	public void saveOrUpdate(CustomerOrderItem customerOrderItem) {
@@ -67,6 +66,7 @@ public class CustomerOrderItemDAOImpl implements CustomerOrderItemDAO{
 		List<CustomerOrderItem> customerOrderItems=query.list();
 		return customerOrderItems;
 	}
+	
 
 	public List<CustomerOrderItem> myOrderByShipmentId(int shipmentId) {
 		Session session = sessionFactory.getCurrentSession();

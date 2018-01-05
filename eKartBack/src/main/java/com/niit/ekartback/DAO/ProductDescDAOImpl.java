@@ -24,8 +24,7 @@ public class ProductDescDAOImpl implements ProductDescDAO{
 
 	public void update(ProductDesc productDesc) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(productDesc);
-		
+		session.update(productDesc);		
 	}
 
 	public List<ProductDesc> list(String productId) {

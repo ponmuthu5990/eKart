@@ -17,14 +17,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public void save(Customer customer) {
 
 		Session session = sessionFactory.getCurrentSession();
-
 		session.saveOrUpdate(customer);
 
 	}
 
 	public void update(Customer customer) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public Customer getByUserName(String username) {

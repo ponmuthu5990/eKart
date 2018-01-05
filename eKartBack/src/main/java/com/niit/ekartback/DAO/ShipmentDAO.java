@@ -18,4 +18,7 @@ public interface ShipmentDAO {
 	public Shipment getByCustomerId(int userId);
 	
 	public List<Shipment> shimentDetails();
+	
+	
+	
 }

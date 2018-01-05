@@ -14,5 +14,7 @@ public interface CategoryDAO {
 	
 	public void delete(Category category);
 	
+	
+	
 	public Category getByCategoryId(int categoryId);
 }

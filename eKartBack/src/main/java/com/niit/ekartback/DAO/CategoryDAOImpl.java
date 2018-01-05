@@ -22,6 +22,8 @@ public class CategoryDAOImpl implements CategoryDAO{
 		session.saveOrUpdate(category);
 	}
 
+	
+	
 	public void update(Category category) {
 		Session session=sessionFactory.getCurrentSession();
 		session.update(category);
